@@ -6,37 +6,36 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class CLI {
-    private static char esc = (char) 27;
-    private static char b = '[';
-    private static String escb = esc + "[";
-    private static String clear = escb + "2J";
-    private static String reset = escb + "0m";
-    private static String bold = escb + "1m";
+    private static final char esc = (char) 27;
+    private static final String escb = esc + "[";
+    private static final String clear = escb + "2J";
+    private static final String reset = escb + "0m";
+    private static final String bold = escb + "1m";
 
-    private static String red = reset + escb + "31m";
-    private static String orange = reset + escb + "37m";
-    private static String yellow = reset + escb + "33m";
+    private static final String red = reset + escb + "31m";
+    private static final String orange = reset + escb + "37m";
+    private static final String yellow = reset + escb + "33m";
 
-    private static String green = reset + escb + "32m";
+    private static final String green = reset + escb + "32m";
 
-    private static String blue = reset + escb + "34m";
-    private static String indigo = reset + escb + "36m";
-    private static String violet = reset + escb + "35m";
+    private static final String blue = reset + escb + "34m";
+    private static final String indigo = reset + escb + "36m";
+    private static final String violet = reset + escb + "35m";
 
     private static final String choiceMsg = blue + bold + "\nChoose an option from the list below:\n";
-    private static String menu = choiceMsg + blue + "\t1) Add\n" + red + "\t2) Set\n\t3) Find\n" + blue + "\t4) Remove\n\t5) Clear\n\t6) Quit\n";
-    private static String addSubmenu = choiceMsg + blue + "\t1) Add to end\n\t2) Add at index\n\t3) Added to front\n"+ red +"\t4) Add all\n"+blue+"\t5) Back";
-    private static String removeSubmenu = choiceMsg + blue + "\t1) Remove from end\n\t2) Remove at index\n\t3) remove from front\n\t4) Remove all\n\t5) Back";
+    private static final String menu = choiceMsg + blue + "\t1) Add\n" + red + "\t2) Set\n\t3) Find\n" + blue + "\t4) Remove\n\t5) Clear\n\t6) Quit\n";
+    private static final String addSubmenu = choiceMsg + blue + "\t1) Add to end\n\t2) Add at index\n\t3) Added to front\n"+ red +"\t4) Add all\n"+blue+"\t5) Back";
+    private static final String removeSubmenu = choiceMsg + blue + "\t1) Remove from end\n\t2) Remove at index\n\t3) remove from front\n\t4) Remove all\n\t5) Back";
 
 
-    private static Scanner sca = new Scanner(System.in);
+    private static final Scanner sca = new Scanner(System.in);
 
     private final String inputMsg = reset + bold + "Please, put your input below\n" + reset + "λ:";
 
     private static final String index = "\n -- INDEX -- \n";
 
-    private String[] st = {"This", "is", "your", "list"};
-    private LinkedList<String> strList = new LinkedList<>(st);
+    private final String[] st = {"This", "is", "your", "list"};
+    private final LinkedList<String> strList = new LinkedList<>(st);
 
     public void header() {
         System.out.print(clear);
@@ -60,7 +59,7 @@ class CLI {
         System.out.print(inputMsg);
         int result;
         try {
-            result = (int) Integer.parseInt(sca.nextLine());
+            result = Integer.parseInt(sca.nextLine());
         } catch (NumberFormatException e) {
             System.out.println(red + bold + "Whoops, ensure your input is correct." + reset);
             result = getInt();
@@ -106,11 +105,8 @@ class CLI {
         strList.remove(index);
     }
 
-    private static final String addListMenu = choiceMsg + blue + "\t1) Add another item to the temp list\n\t2) Finish";
-
     private void addList() {
         ArrayList<String> arr = new ArrayList<>();
-        int index = 0;
         while (true) {
             switch (getInt()) {
                 case 1: break;
@@ -153,8 +149,7 @@ class CLI {
             System.out.println(menu);
             switch (getInt()) {
                 case 1: addSubmenu(); break;
-                case 2: break;
-                case 3: break;
+                case 2, 3: break;
                 case 4: removeSubmenu();
                 case 5: strList.clear(); break;
                 case 6: if (ynconfirm()) { return; } else { break; }
